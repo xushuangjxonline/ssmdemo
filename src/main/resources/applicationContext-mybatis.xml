@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+			http://www.springframework.org/schema/context
+	        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+	        http://www.springframework.org/schema/aop
+	        http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+			http://www.springframework.org/schema/tx
+			http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+
+    <!--  自动扫描包名  只扫描@Service  -->
+    <context:component-scan base-package="com.java" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
+
+    <!-- 外部数据库文件配置引入 -->
+    <bean id="PropertyPlaceholderConfigurerJDBC" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:db.properties</value>
+            </list>
+        </property>
+        <!-- 报错之后是否抛出  true是不抛出  继续加载另一个文件 -->
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+    </bean>
+
+
+    <!-- 配置数据源 数据库连接池  druid -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${db.driver}"></property>
+        <property name="username" value="${db.username}"></property>
+        <property name="password" value="${db.password}"></property>
+        <property name="url" value="${db.url}"></property>
+        <property name="validationQuery" value="true"></property>
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="2" />
+        <property name="minIdle" value="1" />
+        <property name="maxActive" value="50" />
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000" />
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+    </bean>
+
+    <!-- 配置SqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <!-- 2.引入mybatis自己的配置文件 -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+        <property name="mapperLocations" value="classpath:/mapper/*/*.xml"></property>
+    </bean>
+
+
+    <!-- 把dao注册到Spring里 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
+          p:basePackage="com.java.*.dao" p:sqlSessionFactoryBeanName="sqlSessionFactory">
+    </bean>
+
+    <!-- 配置事务 -->
+    <bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <aop:config>
+        <!-- 事务切点声明在Service级别 -->
+        <aop:pointcut expression="execution(* com.java.*.service.*.*(..))" id="txPoint"/>
+        <!-- 应用事务范围以及切点 -->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPoint"/>
+    </aop:config>
+
+    <!-- 声明事务范围 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="create*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="remove*" propagation="REQUIRED"/>
+            <!--声明只读-->
+            <tx:method name="get*" propagation="REQUIRED" />
+            <tx:method name="select*" propagation="REQUIRED" />
+            <tx:method name="find*" propagation="REQUIRED" />
+            <tx:method name="*List" propagation="REQUIRED" />
+            <tx:method name="*" propagation="REQUIRED" />
+            <!-- 触发进行回滚的 Exception -->
+            <tx:method name="*" rollback-for="Exception" />
+        </tx:attributes>
+    </tx:advice>
+    <!-- tx:annotation 自动配置事务，注意这个标签必需放在tx:advice下面，否则不起作用 -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+</beans>
