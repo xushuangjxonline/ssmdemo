@@ -1,7 +1,13 @@
 package com.java.department.handler;
 
+import com.java.user.model.UserModel;
+import com.java.user.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * @author xs
@@ -11,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/department")
 public class DepartmentHandler {
 
-    @RequestMapping("/asd")
-    public String view(){
-        return "view/index";
-    }
+
+
 }

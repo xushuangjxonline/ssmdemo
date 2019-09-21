@@ -12,14 +12,16 @@
 
     <!-- 扫描包  只扫描Controller的注解，不扫描其他@注解，避免后扫描的mvc注解覆盖掉之前spring中已经注入的bean 以至于事务不生效-->
     <!-- hibernate getcurrentSession 获取不到  null  因为没有开启事务 -->
-    <context:component-scan base-package="com.java" use-default-filters="false">
+    <context:component-scan base-package="com.java" >
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
     <!-- 视图解析 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="suffix" value=".jsp"></property>
-        <property name="prefix" value="/WEB-INF/"></property>
+        <property name="suffix" value=".jsp">
+        </property>
+        <property name="prefix" value="/WEB-INF/">
+        </property>
     </bean>
 
 

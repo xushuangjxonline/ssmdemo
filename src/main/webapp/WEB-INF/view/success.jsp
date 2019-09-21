@@ -5,10 +5,10 @@
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <html>
-    <base href="<%=basePath%>">
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <script src="js/bootstrap.js"></script>
+<base href="<%=basePath%>">
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<link href="css/bootstrap.css" rel="stylesheet">
+<script src="js/bootstrap.js"></script>
 
 <body>
 <h2>Hello World!</h2>

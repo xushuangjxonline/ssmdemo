@@ -21,8 +21,9 @@
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
     </context:component-scan>
 
+
     <!-- 外部数据库文件配置引入 -->
-    <bean id="PropertyPlaceholderConfigurerJDBC" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <bean id="propertyPlaceholderConfigurerJDBC" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
                 <value>classpath:db.properties</value>
@@ -35,11 +36,16 @@
 
     <!-- 配置数据源 数据库连接池  druid -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <property name="driverClassName" value="${db.driver}"></property>
-        <property name="username" value="${db.username}"></property>
-        <property name="password" value="${db.password}"></property>
-        <property name="url" value="${db.url}"></property>
-        <property name="validationQuery" value="true"></property>
+        <property name="driverClassName" value="${db.driver}">
+        </property>
+        <property name="username" value="${db.username}">
+        </property>
+        <property name="password" value="${db.password}">
+        </property>
+        <property name="url" value="${db.url}">
+        </property>
+        <property name="validationQuery" value="true">
+        </property>
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="2" />
         <property name="minIdle" value="1" />
@@ -57,22 +63,19 @@
 
     <!-- 配置SqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"></property>
+        <property name="dataSource" ref="dataSource"/>
         <!-- 2.引入mybatis自己的配置文件 -->
-        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
-        <property name="mapperLocations" value="classpath:/mapper/*/*.xml"></property>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath:/mapper/*/*Mapper.xml"/>
     </bean>
-
 
     <!-- 把dao注册到Spring里 -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
-          p:basePackage="com.java.*.dao" p:sqlSessionFactoryBeanName="sqlSessionFactory">
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.java.*.dao">
+        </property>
     </bean>
 
-    <!-- 配置事务 -->
-    <bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"></property>
-    </bean>
+
 
     <aop:config>
         <!-- 事务切点声明在Service级别 -->
@@ -103,4 +106,11 @@
     </tx:advice>
     <!-- tx:annotation 自动配置事务，注意这个标签必需放在tx:advice下面，否则不起作用 -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+
+
+    <!-- 配置事务 -->
+    <bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource">
+        </property>
+    </bean>
 </beans>
