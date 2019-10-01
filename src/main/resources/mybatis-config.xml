@@ -16,13 +16,5 @@
         <setting name="cacheEnabled" value="true"/>
     </settings>
 
-    <!--可以在mapper.xml使用别名简写  但不推荐 因为点不进去不好验证对错-->
-    <typeAliases>
-        <!-- 员工Model的别名 -->
-        <typeAlias type="com.java.staff.model.StaffModel" alias="staffModel"/>
-        <!-- 登录userModel的别名-->
-        <typeAlias type="com.java.user.model.UserModel" alias="userModel"/>
-        <!-- 部门类department的别名-->
-        <typeAlias type="com.java.department.model.DepartmentModel" alias="departmentModel"/>
-    </typeAliases>
+
 </configuration>

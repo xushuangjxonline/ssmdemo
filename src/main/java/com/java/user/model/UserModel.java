@@ -11,6 +11,17 @@ public class UserModel {
     private String power;
     private Integer is_superAdmin;
 
+    @Override
+    public String toString() {
+        return "UserModel{" +
+                "uid=" + uid +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", power='" + power + '\'' +
+                ", is_superAdmin=" + is_superAdmin +
+                '}';
+    }
+
     public Integer getUid() {
         return uid;
     }
@@ -39,8 +50,6 @@ public class UserModel {
         return power;
     }
 
-
-
     public void setPower(String power) {
         this.power = power;
     }
@@ -49,9 +58,8 @@ public class UserModel {
         return is_superAdmin;
     }
 
-    public void setIs_superrAdmin(Integer is_superAdmin) {
+    public void setIs_superAdmin(Integer is_superAdmin) {
         this.is_superAdmin = is_superAdmin;
     }
-
 }
 

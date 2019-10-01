@@ -23,8 +23,8 @@
         select count(*) from user where username = #{username} and password = #{password}
      </select>
 
-     <select id="getUserModelByUsername" parameterType="java.lang.String" resultMap="userMap" useCache="true">
-          select * from user where username = #{username}
+     <select id="getUserModelByUid" parameterType="java.lang.Integer" resultMap="userMap" useCache="true">
+          select * from user where uid = #{uid}
       </select>
 
       <insert id="insertUserModel" parameterType="com.java.user.model.UserModel">

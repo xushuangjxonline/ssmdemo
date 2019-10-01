@@ -3,17 +3,19 @@ package com.java.user.service.impl;
 import com.java.user.dao.UserDao;
 import com.java.user.model.UserModel;
 import com.java.user.service.UserService;
-import org.apache.poi.util.SystemOutLogger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
  * @author xs
  * @date 2019/9/18 - 7:14
  */
-@Service
+@Controller
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -31,8 +33,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserModel getUserModelByUsername(String username) {
-        return userDao.getUserModelByUsername(username);
+    public UserModel getUserModelByUid(Integer uid) {
+        return userDao.getUserModelByUid(uid);
     }
 
     @Override

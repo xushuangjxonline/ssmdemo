@@ -18,7 +18,7 @@ public interface UserService {
     Integer isAllowLogin(String username , String password);
 
     //根据ID查询
-    UserModel getUserModelByUsername(String username);
+    UserModel getUserModelByUid(Integer uid);
 
     //添加管理员
     void insertUserModel(UserModel userModel);
