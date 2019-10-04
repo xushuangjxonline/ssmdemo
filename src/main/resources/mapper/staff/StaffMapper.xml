@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.java.staff.dao.StaffDao">
+
+    <cache readOnly="true" eviction="FIFO" size="512" flushInterval="6000000">
+    </cache>
+
+    <resultMap id="staffMap" type="com.java.staff.model.StaffModel">
+        <result column="sid" property="sid"/>
+        <result column="staffname" property="staffname"/>
+        <result column="gender" property="gender"/>
+        <result column="email" property="email"/>
+        <result column="photo" property="photo"/>
+        <result column="salary" property="salary"/>
+        <collection property="staffDepartmentMappingModelList" ofType="com.java.staffdepartmentmapping.model.StaffDepartmentMappingModel"
+                    column="sid"
+                    select="com.java.staffdepartmentmapping.dao.StaffDepartmentDao.getMapperModelByid">
+        </collection>
+    </resultMap>
+
+    <select id="selectStaffListByPaging" resultMap="staffMap" parameterType="java.lang.Integer" useCache="true">
+        select * from staff limit #{startIndex} , #{pageSize}
+    </select>
+
+    <select id="selectStaffList" resultMap="staffMap" useCache="true">
+        select * from staff
+    </select>
+
+        <select id="getStaffModelBySid" resultMap="staffMap" parameterType="java.lang.Integer" useCache="true">
+            select * from staff where sid = #{sid}
+        </select>
+
+        <insert id="insertStaffModel" parameterType="com.java.staff.model.StaffModel">
+            insert into staff (name,gender,email,photo,salary) values (#{name},#{gender},#{email},#{photo},#{salary})
+        </insert>
+
+       <update id="updateStaffModel" parameterType="com.java.staff.model.StaffModel">
+           update staff set name=#{name},gender=#{gender},email=#{email},photo=#{photo},salary=#{salary} where sid= #{sid}
+       </update>
+
+       <delete id="deleteStaffModel" parameterType="java.lang.Integer">
+           delete  from  staff where  sid = #{sid}
+       </delete>
+</mapper>

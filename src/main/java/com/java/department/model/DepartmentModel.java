@@ -6,8 +6,17 @@ package com.java.department.model;
  */
 public class DepartmentModel {
     private Integer did;
-    private String name;
+    private String departmentname;
     private String info;
+
+    @Override
+    public String toString() {
+        return "DepartmentModel{" +
+                "did=" + did +
+                ", departmentname='" + departmentname + '\'' +
+                ", info='" + info + '\'' +
+                '}';
+    }
 
     public Integer getDid() {
         return did;
@@ -25,11 +34,11 @@ public class DepartmentModel {
         this.info = info;
     }
 
-    public String getName() {
-        return name;
+    public String getDepartmentname() {
+        return departmentname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDepartmentname(String departmentname) {
+        this.departmentname = departmentname;
     }
 }

@@ -31,7 +31,7 @@ public class UserHandler {
 
     @RequestMapping(value = "/welcome")
     public String view() {
-        return "view/loginPage";
+        return "user/loginPage";
     }
 
 
@@ -44,10 +44,10 @@ public class UserHandler {
         if (userServiceimpl.isAllowLogin(username.trim(), password.trim()).equals(1)) {
             List<UserModel> list = userServiceimpl.selectUserList();
             modelAndView.addObject("userList", list);
-            modelAndView.setViewName("view/list");
+            modelAndView.setViewName("user/list");
             return modelAndView;
         } else {
-            modelAndView.setViewName("view/fail");
+            modelAndView.setViewName("user/fail");
             return modelAndView;
         }
     }
@@ -61,7 +61,7 @@ public class UserHandler {
         List<UserModel> list = userServiceimpl.selectUserList();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("userList", list);
-        modelAndView.setViewName("view/list");
+        modelAndView.setViewName("user/list");
         return modelAndView;
     }
 
@@ -72,14 +72,14 @@ public class UserHandler {
         List<UserModel> list = userServiceimpl.selectUserList();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("userList", list);
-        modelAndView.setViewName("view/list");
+        modelAndView.setViewName("user/list");
         return modelAndView;
     }
 
     //跳转添加页面的方法
     @RequestMapping(value = "/add" )
     public String jumpAddPage(){
-        return  "view/add";
+        return  "user/add";
     }
 
     //添加新管理员的方法
@@ -88,7 +88,7 @@ public class UserHandler {
         ModelAndView modelAndView = new ModelAndView();
         userServiceimpl.insertUserModel(userModel);
         modelAndView.addObject("userModel",userModel);
-        modelAndView.setViewName("view/isContinue");
+        modelAndView.setViewName("user/isContinue");
         return modelAndView;
     }
 
@@ -98,7 +98,7 @@ public class UserHandler {
         ModelAndView modelAndView = new ModelAndView();
         List<UserModel> list = userServiceimpl.selectUserList();
         modelAndView.addObject("userList", list);
-        modelAndView.setViewName("view/list");
+        modelAndView.setViewName("user/list");
         return modelAndView;
     }
 
@@ -111,7 +111,7 @@ public class UserHandler {
         UserModel userModel = userServiceimpl.getUserModelByUid(uid);
         System.out.println(userModel.toString());
         modelAndView.addObject("userModel",userModel);
-        modelAndView.setViewName("view/update");
+        modelAndView.setViewName("user/update");
         return modelAndView;
     }
 
@@ -124,7 +124,7 @@ public class UserHandler {
         userServiceimpl.updateUserModel(userModel);
         List<UserModel> list = userServiceimpl.selectUserList();
         modelAndView.addObject("userList", list);
-        modelAndView.setViewName("view/list");
+        modelAndView.setViewName("user/list");
         return modelAndView;
     }
 
@@ -134,7 +134,7 @@ public class UserHandler {
         ModelAndView modelAndView = new ModelAndView();
         UserModel userModel = userServiceimpl.getUserModelByUid(uid);
         modelAndView.addObject("userModel",userModel);
-        modelAndView.setViewName("view/view");
+        modelAndView.setViewName("user/view");
         return  modelAndView;
     }*/
 

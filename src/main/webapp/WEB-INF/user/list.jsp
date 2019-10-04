@@ -37,7 +37,6 @@
                 <td align="center">${userModel.is_superAdmin}</td>
                 <td align="center"> <input type="button" id="delete" value="删除" onclick="del(${userModel.uid});">
                                     <input type ="button" id="update" value="修改" onclick="update(${userModel.uid});">
- <%--                                   <input type="button" id="view" value="查看详细" onclick="view(${userModel.uid});">--%>
 
                 </td>
             </tr>

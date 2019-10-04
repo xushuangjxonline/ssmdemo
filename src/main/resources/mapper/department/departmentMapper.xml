@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.java.department.dao.DepartmentDao">
+   <cache readOnly="true" eviction="FIFO" size="512" flushInterval="6000000">
+    </cache>
+
+    <resultMap id="departmentModel" type="com.java.department.model.DepartmentModel">
+        <result column="did" property="did"/>
+        <result column="departmentname" property="departmentname"/>
+        <result column="info" property="info"/>
+    </resultMap>
+
+    <select id="getDepartmentByid" parameterType="java.lang.Integer" resultMap="departmentModel">
+        select * from department where did = #{department_id}
+    </select>
+</mapper>

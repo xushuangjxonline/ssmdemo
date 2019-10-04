@@ -70,8 +70,8 @@
     </bean>
 
     <!-- 把dao注册到Spring里 -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.java.*.dao"/>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
+          p:basePackage="com.java.*.dao" p:sqlSessionFactoryBeanName="sqlSessionFactory">
     </bean>
 
 
