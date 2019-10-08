@@ -7,6 +7,7 @@
     <cache readOnly="true" eviction="FIFO" size="512" flushInterval="6000000">
     </cache>
 
+
     <resultMap id="staffMap" type="com.java.staff.model.StaffModel">
         <result column="sid" property="sid"/>
         <result column="staffname" property="staffname"/>
@@ -20,6 +21,8 @@
         </collection>
     </resultMap>
 
+
+
     <select id="selectStaffListByPaging" resultMap="staffMap" parameterType="java.lang.Integer" useCache="true">
         select * from staff limit #{startIndex} , #{pageSize}
     </select>
@@ -28,19 +31,23 @@
         select * from staff
     </select>
 
-        <select id="getStaffModelBySid" resultMap="staffMap" parameterType="java.lang.Integer" useCache="true">
-            select * from staff where sid = #{sid}
-        </select>
+    <select id="getStaffModelBySid" resultMap="staffMap" parameterType="java.lang.Integer" useCache="true">
+        select * from staff where sid = #{sid}
+    </select>
 
-        <insert id="insertStaffModel" parameterType="com.java.staff.model.StaffModel">
-            insert into staff (name,gender,email,photo,salary) values (#{name},#{gender},#{email},#{photo},#{salary})
-        </insert>
+    <select id="getSidByStaffname" parameterType="java.lang.String" resultType="java.lang.Integer" useCache="true">
+        select sid from staff where staffname = #{staffname}
+    </select>
 
-       <update id="updateStaffModel" parameterType="com.java.staff.model.StaffModel">
-           update staff set name=#{name},gender=#{gender},email=#{email},photo=#{photo},salary=#{salary} where sid= #{sid}
-       </update>
+    <insert id="insertStaffModel" parameterType="com.java.staff.model.StaffModel">
+        insert into staff (staffname,gender,email,photo,salary) values (#{staffname},#{gender},#{email},#{photo},#{salary})
+    </insert>
 
-       <delete id="deleteStaffModel" parameterType="java.lang.Integer">
-           delete  from  staff where  sid = #{sid}
-       </delete>
+   <update id="updateStaffModel" parameterType="com.java.staff.model.StaffModel">
+       update staff set staffname=#{staffname},gender=#{gender},email=#{email},photo=#{photo},salary=#{salary} where sid= #{sid}
+   </update>
+
+   <delete id="deleteStaffModel" parameterType="java.lang.Integer">
+       delete  from  staff where  sid = #{sid}
+   </delete>
 </mapper>

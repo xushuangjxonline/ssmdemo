@@ -31,6 +31,10 @@ public class StaffServiceImpl implements StaffService {
         pageBean.setList(list);
         return pageBean;
     }
+    @Override
+    public Integer getSidByStaffname(String staffname){
+        return staffDao.getSidByStaffname(staffname);
+    }
 
     @Override
     public List<StaffModel> selectStaffList() {

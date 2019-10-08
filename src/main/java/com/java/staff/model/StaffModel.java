@@ -47,7 +47,6 @@ public class StaffModel {
     }
 
 
-
     public String getGender() {
         return gender;
     }

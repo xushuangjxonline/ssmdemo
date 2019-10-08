@@ -14,10 +14,17 @@
        <collection property="departmentModelList" ofType="com.java.department.model.DepartmentModel"
                    select="com.java.department.dao.DepartmentDao.getDepartmentByid"
                    column="department_id">
-
         </collection>
     </resultMap>
     <select id="getMapperModelByid" parameterType="java.lang.Integer" resultMap="staffDepartmentMap">
         select * from staff_department_mapping where staff_id = #{sid}
     </select>
+    
+    <insert id="insertMapperModel" parameterType="java.lang.Integer">
+        insert into staff_department_mapping (staff_id,department_id) values (#{sid},#{did})
+    </insert>
+    
+    <delete id="deleteMapperModelByid"  parameterType="java.lang.Integer">
+        delete  from staff_department_mapping where staff_id = #{sid}
+    </delete>
 </mapper>

@@ -2,7 +2,6 @@ package com.java.staff.service;
 
 import com.java.staff.model.StaffModel;
 import com.java.utils.pageUtils.PageBean;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -28,4 +27,8 @@ public interface StaffService {
 
     //删除员工信息
     void deleteStaffModel(Integer sid);
+
+    //通过staffname属性获取sid
+    Integer getSidByStaffname(String staffname);
+
 }

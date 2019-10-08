@@ -10,7 +10,7 @@
 <link href="css/bootstrap.css" rel="stylesheet">
 <script src="js/bootstrap.js"></script>
 
-<title>员工页面</title>
+<title>员工列表</title>
 <body>
    <div class="container" id="pagingList">
        <table style="width: 900px;" class="table table-striped table-hover table-bordered">

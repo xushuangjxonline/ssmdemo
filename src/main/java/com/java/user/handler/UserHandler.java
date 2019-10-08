@@ -38,9 +38,7 @@ public class UserHandler {
     //TODO session redis   list和modeldAndView是否可以设置成单例模式?  处理登陆的方法
     @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
     public ModelAndView doLogin(String username, String password) {
-
         ModelAndView modelAndView = new ModelAndView();
-
         if (userServiceimpl.isAllowLogin(username.trim(), password.trim()).equals(1)) {
             List<UserModel> list = userServiceimpl.selectUserList();
             modelAndView.addObject("userList", list);

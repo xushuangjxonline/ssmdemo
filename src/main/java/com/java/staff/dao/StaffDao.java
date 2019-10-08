@@ -17,7 +17,7 @@ public interface StaffDao {
     List<StaffModel> selectStaffListByPaging(@Param("startIndex")Integer startIndex, @Param("pageSize")Integer pageSize);
 
     //根据ID查询员工信息
-    StaffModel getStaffModelBySid(Integer id);
+    StaffModel getStaffModelBySid(Integer sid);
 
     //添加员工信息
     void insertStaffModel(StaffModel staffModel);
@@ -27,6 +27,9 @@ public interface StaffDao {
 
     //删除员工信息
     void deleteStaffModel(Integer sid);
+
+    //通过staffname属性获取sid
+    Integer getSidByStaffname(String staffname);
 
 
 }
