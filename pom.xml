@@ -67,7 +67,7 @@
 
     <!-- 后台验证工具 -->
     <!-- 1.hibernate-validator -->
-    <hibernate-validator.version>5.1.3.Final</hibernate-validator.version>
+    <hibernate-validator.version>5.3.5.Final</hibernate-validator.version>
 
     <!-- 文件上传工具 -->
     <!-- 1.commons-fileupload -->
