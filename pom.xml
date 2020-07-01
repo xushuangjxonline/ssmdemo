@@ -55,7 +55,7 @@
     <log4j.version>2.1</log4j.version>
 
     <!-- Quartz -->
-    <quartz.version>2.1.7</quartz.version>
+    <quartz.version>2.3.2</quartz.version>
     <!-- Activiti -->
     <activiti.version>5.16.3</activiti.version>
     <!-- cas_client -->
