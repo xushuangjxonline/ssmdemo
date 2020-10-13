@@ -61,7 +61,7 @@
     <!-- cas_client -->
     <cas_client.version>3.3.0</cas_client.version>
     <!-- Test -->
-    <junit.version>4.10</junit.version>
+    <junit.version>4.13.1</junit.version>
     <!-- JDK -->
     <jdk.version>1.8</jdk.version>
 
