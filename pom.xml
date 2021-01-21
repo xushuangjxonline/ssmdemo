@@ -24,7 +24,7 @@
     <freemarker.version>2.3.2</freemarker.version>
     <!-- 6.Json -->
     <jackson.version>1.9.13</jackson.version>
-    <jackson-databind.version>2.5.1</jackson-databind.version>
+    <jackson-databind.version>2.9.10.7</jackson-databind.version>
     <!-- Spring -->
     <spring-framework.version>4.0.6.RELEASE</spring-framework.version>
     <!-- 面向切面工具 -->
